@@ -29,7 +29,7 @@ export function fetchBook(bookId) {
 }
 
 //Add a new book to the database
-export function saveBook(book) {
+export function saveNewBook(book) {
     const opts = {
         method: 'POST',
         body: JSON.stringify(book),
