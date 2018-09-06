@@ -1,10 +1,10 @@
 const BASE_URL = 'http://localhost:3000';
 
 //Fetches all Books from localhost:3000
-export function fetchBooks(id) {
-    return fetch(`${BASE_URL}/books`)
-        .then(resp => resp.json())
-        .catch(err => {
+export function fetchBooks() {
+    return fetch(`http://localhost:3000/books`)
+        .then((resp) =>  resp.json())
+        .catch((err) => {
             throw Error(err);
         });
 }
@@ -17,7 +17,7 @@ export function fetchPatrons() {
                 throw Error(err);
             });
 }
-//this fetches one book.
+//This fetches one book.
 export function fetchBook(bookId) {
     return fetch(`${BASE_URL}/book/${bookId}`)
     .then(resp => {

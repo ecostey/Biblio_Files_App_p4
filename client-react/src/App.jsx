@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
+import './css/allBooks.css';
 import {
   fetchBooks,
   fetchPatrons,
@@ -9,6 +10,7 @@ import {
   updateBook,
   deleteBook
 } from './services/api';
+import Books from './components/Books';
 import CreateBook from './components/CreateBook';
 
 
@@ -23,16 +25,27 @@ class App extends Component {
       rented_by: '',
       due_date: '',
       patron_name: '',
-      patron_email: ''
+      patron_email: '',
+      books: []
     }
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleBookSubmit = this.handleBookSubmit.bind(this);
   }
 
   componentDidMount(){
-    this.fetchBooks()
-    .then(data => this.setState({books: data.books}));
+
+    fetchBooks()
+    .then(data => this.setState({ books: data.books}));
   }
+
+  // fetchAllBooks() {
+  //   fetchBooks()
+  //   .then(
+  //     books => this.setState({
+  //     books: books
+  //   }))
+  //   .catch((err) => {throw err;});
+  // }
 
   handleBookSubmit(e) {
     e.preventDefault();
@@ -43,16 +56,16 @@ class App extends Component {
 
     saveBook(newBook) 
       .then(resp=> {
-        this.fetchBook(bookId);
+        this.fetchBook(this.bookId);
         this.setState({ title: '', author: '', isbn: '' })
       }).catch(err => {
         throw Error(err);
       });
   }
 
-function handleChange () {
+// function handleChange () {
 
-}
+// }
 
 
 render() {
@@ -61,6 +74,9 @@ render() {
       <header className="App-header">
         <h1 className="App-title">Biblio Files</h1>
       </header>
+      <body>
+        <Books books={this.state.books}/>
+      </body>
     </div>
   );
 }
