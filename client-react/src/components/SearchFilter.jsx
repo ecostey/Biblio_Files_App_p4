@@ -8,7 +8,7 @@ import React from 'react';
                 type="text" 
                 className="search-box" 
                 placeholder="Search Catalogue" 
-                onChange={props.filterList} 
+                onChange={props.handleChange} 
             />
         </form>
       </div>

@@ -1,29 +1,46 @@
-import React from 'react';
-import SearchFilter from './components/SearchFilter';
+import React, { Component } from 'react';
+import SearchFilter from './SearchFilter';
 
 
-//Filter through props.books.
-//Return 'words' that match the inputted string.
-function FilterBooks (props, string){
-    const list = props.books.filter ((word) => {
-        return word.includes(string);
-    })
-    return list;
-}
+
+
 
 //Map through all the books in the database.
 //Return the title, author, and isbn from each book.
-function Books (props){
-    return (
+class Books extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        filterInput: '',
+
+
+      }
+      this.handleChange = this.handleChange.bind(this)
+    }
+    
+
+      handleChange(ev){
+          this.setState({filterInput:ev.target.value})
+      }
+
+
+    render() {
+        // Filter through props.books.
+        // Return 'words' that match the inputted string.
+        let filteredBooks =  this.props.books.filter ((book) => {
+        return book.title.toLowerCase().includes(this.state.filterInput.toLowerCase());
+        }) 
+        return (
         <div>
-        <SearchFilter />
-        { props.books.map(book => (
+        <SearchFilter
+            handleChange={this.handleChange} />
+        { filteredBooks.map(book => (
             <div 
                 key={book.id} 
                 className="AllBooks"
                 onClick={(ev) => {
                 ev.preventDefault();
-                props.selectBook(book)
+                this.props.selectBook(book)
             }}>
                 <div className="AllTitles">{book.title}</div>
                 <div className="AllAuthors">{book.author}</div>
@@ -33,6 +50,7 @@ function Books (props){
         ))}
         </div>
     );
+}
 }
 
 export default Books;

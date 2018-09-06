@@ -9,7 +9,7 @@ import {
   deleteBook
 } from './services/api';
 import Books from './components/Books';
-import OneBook from './components/OneBook'
+import OneBook from './components/OneBook';
 import CreateBook from './components/CreateBook';
 import './css/App.css';
 import './css/allBooks.css';
