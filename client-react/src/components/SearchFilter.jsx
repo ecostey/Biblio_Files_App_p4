@@ -1,17 +1,18 @@
 import React from 'react';
 
- function SearchFilter () {
+ function SearchFilter (props) {
     return (
       <div className="filter-list">
         <form>
             <input 
                 type="text" 
                 className="search-box" 
-                placeholder="Search by Title" 
-                onChange={this.filterList} 
+                placeholder="Search Catalogue" 
+                onChange={props.filterList} 
             />
         </form>
-        <List items={this.state.filteredBooks}/>
       </div>
     );
   }
+
+  export default SearchFilter;

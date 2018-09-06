@@ -1,4 +1,6 @@
 import React from 'react';
+import SearchFilter from './components/SearchFilter';
+
 
 //Filter through props.books.
 //Return 'words' that match the inputted string.
@@ -14,6 +16,7 @@ function FilterBooks (props, string){
 function Books (props){
     return (
         <div>
+        <SearchFilter />
         { props.books.map(book => (
             <div 
                 key={book.id} 

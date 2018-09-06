@@ -87,12 +87,11 @@ switchView() {
   switch (currentView) {
     //All Books & Search View
     case 'all-books':
-      return 
-      <Books 
-        books={books}
-        oneBook={oneBook}
-        selectBook={this.selectBook}
-      />
+      return <Books 
+            books={books}
+            oneBook={oneBook}
+            selectBook={this.selectBook}
+          />
     //Selected Book View
     case 'one-book':
       return <OneBook 
