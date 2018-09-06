@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './css/App.css';
-import './css/allBooks.css';
 import {
   fetchBooks,
   fetchPatrons,
@@ -11,7 +9,11 @@ import {
   deleteBook
 } from './services/api';
 import Books from './components/Books';
+import OneBook from './components/OneBook'
 import CreateBook from './components/CreateBook';
+import './css/App.css';
+import './css/allBooks.css';
+import './css/oneBook.css';
 
 
 
@@ -26,26 +28,37 @@ class App extends Component {
       due_date: '',
       patron_name: '',
       patron_email: '',
-      books: []
+      books: [],
+      selectedBook: '',
+      patrons: [],
+      currentView: 'all-books',
     }
     this.componentDidMount = this.componentDidMount.bind(this);
     this.handleBookSubmit = this.handleBookSubmit.bind(this);
+    this.selectBook = this.selectBook.bind(this);
   }
 
   componentDidMount(){
-
     fetchBooks()
     .then(data => this.setState({ books: data.books}));
   }
 
-  // fetchAllBooks() {
-  //   fetchBooks()
-  //   .then(
-  //     books => this.setState({
-  //     books: books
-  //   }))
-  //   .catch((err) => {throw err;});
-  // }
+  // select one dog & set state
+  fetchOneBook(id) {
+    fetchBook(id)
+      .then(data => this.setState({
+        books: data.book,
+        currentView: 'one-book'
+      }))
+  };
+
+  // select dog function
+  selectBook(book) {
+    this.setState({
+      selectedBook: book,
+      currentView: 'one-book'
+    })
+  };
 
   handleBookSubmit(e) {
     e.preventDefault();
@@ -67,6 +80,28 @@ class App extends Component {
 
 // }
 
+switchView() {
+  const { currentView } = this.state;
+  const { books, oneBook, selectedBook } = this.state;
+
+  switch (currentView) {
+    //All Books & Search View
+    case 'all-books':
+      return 
+      <Books 
+        books={books}
+        oneBook={oneBook}
+        selectBook={this.selectBook}
+      />
+    //Selected Book View
+    case 'one-book':
+      return <OneBook 
+        book={selectedBook}
+      />
+
+  }
+}
+
 
 render() {
   return (
@@ -75,7 +110,7 @@ render() {
         <h1 className="App-title">Biblio Files</h1>
       </header>
       <body>
-        <Books books={this.state.books}/>
+        {this.switchView()} 
       </body>
     </div>
   );
