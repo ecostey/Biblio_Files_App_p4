@@ -29,15 +29,14 @@ class Books extends Component {
         })
         return (
             <div>
-                
+                <SearchFilter
+                    handleChange={this.handleChange} 
+                />
                 <CreateBook 
                   newBookModel={this.props.newBookModel} 
                   toggle={this.props.toggle} 
                   saveNewBook={this.props.saveNewBook}
                   handleChange={this.props.handleBookChange}
-                />
-                <SearchFilter
-                    handleChange={this.handleChange} 
                 />
                 <button onClick={this.props.toggle}> Add New Book to Catalogue </button>
                 {filteredBooks.map(book => (

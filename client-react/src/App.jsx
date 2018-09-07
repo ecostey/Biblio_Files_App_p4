@@ -86,7 +86,6 @@ class App extends Component {
     saveNewBook(newBook)
       .then(resp => {
         console.log(resp);
-        debugger
         fetchBook(this.bookId);
         this.setState({ title: '', author: '', isbn: '' })
       }).catch(err => {
