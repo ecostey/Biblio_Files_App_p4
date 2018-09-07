@@ -37,12 +37,20 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.toggleView = this.toggleView.bind(this);
     this.fetchAllBooksPg = this.fetchAllBooksPg.bind(this);
+    this.homePage = this.homePage.bind(this);
   }
 
   //When component first mount, fetch all books & set them to state.
   componentDidMount() {
     fetchBooks()
       .then(data => this.setState({ books: data.books }));
+  }
+
+  //Make logo/Header clickable- will return user to 'all-books' view.
+  homePage () {
+    this.setState({
+      currentView: 'all-books'
+    })
   }
 
   //To be passed down to delete modal:
@@ -77,9 +85,10 @@ class App extends Component {
       .then(data => {
         debugger
         this.setState({
-        selectedBook: data,
-        currentView: 'one-book'
-      })})
+          selectedBook: data,
+          currentView: 'one-book'
+        })
+      })
   };
 
   //Toggle between views 
@@ -131,7 +140,7 @@ class App extends Component {
           newBookModal={this.state.newBookModal}
           saveNewBook={this.handleNewBookSubmit}
           handleBookChange={this.handleChange}
-          handleNewBookSubmit={this.handleNewBookSubmit}
+
         />
       //Single Book View
       case 'one-book':
@@ -139,6 +148,7 @@ class App extends Component {
           book={selectedBook}
           fetchAllBooksPg={this.fetchAllBooksPg}
           toggleView={this.toggleView}
+          // headerRenderToHome={this.headerRenderToHome}
         />
     }
 
@@ -149,7 +159,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Biblio Files</h1>
+          <h1
+            className="App-title"
+            onClick={this.homePage}
+          >Biblio Files
+          </h1>
         </header>
         <div>
           {this.switchView()}
