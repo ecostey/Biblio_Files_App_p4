@@ -6,11 +6,9 @@ import {
   fetchPatron,
   saveNewBook,
   updateBook,
-  deleteBook
 } from './services/api';
 import Books from './components/Books';
 import OneBook from './components/OneBook';
-import CreateBook from './components/CreateBook';
 import './css/App.css';
 import './css/allBooks.css';
 import './css/oneBook.css';
@@ -28,39 +26,43 @@ class App extends Component {
       patron_name: '',
       patron_email: '',
       books: [],
-      newBookModel: false,
+      newBookModal: false,
       selectedBook: '',
       patrons: [],
       currentView: 'all-books',
     }
-    this.componentDidMount = this.componentDidMount.bind(this);
     this.selectBook = this.selectBook.bind(this);
     this.handleNewBookSubmit = this.handleNewBookSubmit.bind(this);
-    this.toggle = this.toggle.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+    this.toggleModal = this.toggleModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.toggleView = this.toggleView.bind(this);
+    this.fetchAllBooksPg = this.fetchAllBooksPg.bind(this);
   }
 
+  //When component first mount, fetch all books & set them to state.
   componentDidMount() {
     fetchBooks()
       .then(data => this.setState({ books: data.books }));
   }
 
+  //To be passed down to delete modal:
+  fetchAllBooksPg() {
+    fetchBooks()
+      .then(data => {
+        this.setState({ books: data.books })
+      });
+  }
+
+  //Set state to whatever is entered into an input field.
+  //Used in Create & Update modals
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
-  // select one dog & set state
-  fetchOneBook(id) {
-    fetchBook(id)
-      .then(data => this.setState({
-        books: data.book,
-        currentView: 'one-book'
-      }))
-  };
-
   // select one book
+  //Used in All Books filter function
   selectBook(book) {
     this.setState({
       selectedBook: book,
@@ -68,9 +70,30 @@ class App extends Component {
     })
   };
 
-  toggle() {
+  // fetch one book & set state to that one book
+  fetchOneBook(id) {
+    debugger
+    fetchBook(id)
+      .then(data => {
+        debugger
+        this.setState({
+        selectedBook: data,
+        currentView: 'one-book'
+      })})
+  };
+
+  //Toggle between views 
+  //Use in modals - similar to a redirect.
+  toggleView(view) {
     this.setState({
-      newBookModel: !this.state.newBookModel
+      currentView: view
+    });
+  }
+
+  //toggle whether the create-new-book modal is hidden/active
+  toggleModal() {
+    this.setState({
+      newBookModal: !this.state.newBookModal
     })
   }
 
@@ -85,9 +108,9 @@ class App extends Component {
     //Save the new book's data to state
     saveNewBook(newBook)
       .then(resp => {
-        console.log(resp);
-        fetchBook(this.bookId);
         this.setState({ title: '', author: '', isbn: '' })
+        this.fetchOneBook(resp.id);
+        this.toggleView('one-book');
       }).catch(err => {
         throw Error(err);
       });
@@ -97,7 +120,6 @@ class App extends Component {
   switchView() {
     const { currentView } = this.state;
     const { books, oneBook, selectedBook } = this.state;
-
     switch (currentView) {
       //All Books & Search View
       case 'all-books':
@@ -105,15 +127,18 @@ class App extends Component {
           books={books}
           oneBook={oneBook}
           selectBook={this.selectBook}
-          toggle={this.toggle}
-          newBookModel={this.state.newBookModel}
+          toggleModal={this.toggleModal}
+          newBookModal={this.state.newBookModal}
           saveNewBook={this.handleNewBookSubmit}
           handleBookChange={this.handleChange}
+          handleNewBookSubmit={this.handleNewBookSubmit}
         />
       //Single Book View
       case 'one-book':
         return <OneBook
           book={selectedBook}
+          fetchAllBooksPg={this.fetchAllBooksPg}
+          toggleView={this.toggleView}
         />
     }
 
@@ -126,9 +151,9 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Biblio Files</h1>
         </header>
-        <body>
+        <div>
           {this.switchView()}
-        </body>
+        </div>
       </div>
     );
   }

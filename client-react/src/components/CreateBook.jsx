@@ -1,9 +1,9 @@
 import React from 'react';
 
-
+//Form & Modal from Bulma:
 function CreateBook(props) {
     return (
-        <div className= {props.newBookModel ? "modal is-active" : "modal"}>
+        <div className= {props.newBookModal ? "modal is-active" : "modal"}>
             <div className="modal-background"></div>
             <div className="modal-card">
                 <header className="modal-card-head">
@@ -11,7 +11,7 @@ function CreateBook(props) {
                     <button 
                         className="delete" 
                         aria-label="close"
-                        onClick={props.toggle}
+                        onClick={props.toggleModal}
                     ></button>
                 </header>
                 <section className="modal-card-body">
@@ -34,20 +34,16 @@ function CreateBook(props) {
                             value={props.isbn}
                             placeholder="isbn #"
                             onChange={props.handleChange} />
-                        {/* <input
-                            type="submit"
-                            value="submit book"
-                        /> */}
                     </ form>
                 </section>
                 <footer className="modal-card-foot">
                     <button 
                         className="button is-success"
-                        onClick={props.saveNewBook}    
+                        onClick={props.handleNewBookSubmit}    
                     >Save</button>
                     <button 
                         className="button"
-                        onClick={props.toggle}
+                        onClick={props.toggleModal}
                     >Cancel</button>
                 </footer>
             </div>

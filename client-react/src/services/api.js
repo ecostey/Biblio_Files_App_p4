@@ -19,7 +19,7 @@ export function fetchPatrons() {
 }
 //This fetches one book.
 export function fetchBook(bookId) {
-    return fetch(`${BASE_URL}/book/${bookId}`)
+    return fetch(`${BASE_URL}/books/${bookId}`)
     .then(resp => {
         return resp.json()
     })

@@ -10,7 +10,7 @@ class Books extends Component {
         super(props);
         this.state = {
             filterInput: '',
-            model: '',
+            modal: '',
 
         }
         this.handleChange = this.handleChange.bind(this)
@@ -33,12 +33,13 @@ class Books extends Component {
                     handleChange={this.handleChange} 
                 />
                 <CreateBook 
-                  newBookModel={this.props.newBookModel} 
-                  toggle={this.props.toggle} 
+                  newBookModal={this.props.newBookModal} 
+                  toggleModal={this.props.toggleModal} 
                   saveNewBook={this.props.saveNewBook}
                   handleChange={this.props.handleBookChange}
+                  handleNewBookSubmit={this.props.handleNewBookSubmit}
                 />
-                <button onClick={this.props.toggle}> Add New Book to Catalogue </button>
+                <button onClick={this.props.toggleModal}> Add New Book to Catalogue </button>
                 {filteredBooks.map(book => (
                     <div
                         key={book.id}
