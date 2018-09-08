@@ -1,5 +1,6 @@
 import React from 'react';
 import DeleteBook from './DeleteBook'
+import UpdateBook from './UpdateBook'
 
 function OneBook(props) {
     return (
@@ -10,6 +11,7 @@ function OneBook(props) {
             <UpdateBook
                 bookId={props.book.id}
                 toggleView={props.toggleView}
+                handleUpdateBookSubmit={props.handleUpdateBookSubmit}
                 //fetchAllBooksPg={props.fetchAllBooksPg}
             />
             <DeleteBook

@@ -1,4 +1,15 @@
-class App extends React.Component {
+import React, { Component } from 'react';
+import {
+    DialogOverlay,
+    DialogContent
+} from "@reach/dialog";
+import {
+    fetchBooks,
+    updateBook
+} from '../services/api';
+
+
+class UpdateBook extends Component {
 
     constructor() {
       super()
@@ -8,24 +19,54 @@ class App extends React.Component {
       this.close = () => this.setState({ showDialog: false });
     }
 
+    //Update book's author/isbn/title &save inputs to database
+    //Then re-render 'OneBook' component/view
+    //to show user the book was updated
+    handleUpdateClick() {
+        this.close();
+        this.handleUpdateBookSubmit(this.bookId)
+            .then(resp => {
+                this.toggleView('one-book');
+                this.fetchAllBooksPg();
+            });
+    }
+
     render() {
       return (
         <div>
-          <button onClick={this.open}>Show Dialog</button>
-
+          <button onClick={this.open}>Edit Book</button>
           {this.state.showDialog && (
             <DialogOverlay initialFocusRef={this.buttonRef}>
               <DialogContent>
                 <p>
-                  Pass the button ref to DialogOverlay and
-                  the button.
+                  Edit Book Information...
                 </p>
-                <button onClick={this.close}>Not me</button>{" "}
+                <form onSubmit={this.handleBookSubmit} >
+                        <input
+                            type="text"
+                            name="title"
+                            value={this.title}
+                            placeholder="Title"
+                            onChange={this.handleChange} />
+                        <input
+                            type="text"
+                            name="author"
+                            value={this.author}
+                            placeholder="Author's Name"
+                            onChange={this.handleChange} />
+                        <input
+                            type="text"
+                            name="isbn"
+                            value={this.isbn}
+                            placeholder="isbn #"
+                            onChange={this.handleChange} />
+                    </ form>
+                <button onClick={this.close}>Cancel</button>{" "}
                 <button
                   ref={this.buttonRef}
                   onClick={this.close}
                 >
-                  Got me!
+                  Update
                 </button>
               </DialogContent>
             </DialogOverlay>
@@ -34,3 +75,5 @@ class App extends React.Component {
       );
     }
   }
+
+  export default UpdateBook;

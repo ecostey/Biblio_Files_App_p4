@@ -106,17 +106,32 @@ class App extends Component {
 
   //On submit - save the new book to the books table
   handleNewBookSubmit(e) {
-    debugger
     e.preventDefault();
     //destructure state
     const { title, author, isbn } = this.state;
     //request body to POST to books table.
     const newBook = { title, author, isbn };
-    debugger
     //Save the new book's data to state
     saveNewBook(newBook)
       .then(resp => {
-        debugger
+        this.setState({ title: '', author: '', isbn: '' })
+        this.fetchOneBook(resp.id);
+        this.toggleView('one-book');
+        this.toggleModal();
+      }).catch(err => {
+        throw Error(err);
+      });
+  }
+
+  handleUpdateBookSubmit(e) {
+    e.preventDefault();
+    //destructure state
+    const { title, author, isbn } = this.state;
+    //request body to PUT to books table.
+    const book = { title, author, isbn };
+    //Save the new book's data to state
+    updateBook(book, this.bookId)
+      .then(resp => {
         this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
         this.toggleView('one-book');
@@ -149,7 +164,7 @@ class App extends Component {
           book={selectedBook}
           fetchAllBooksPg={this.fetchAllBooksPg}
           toggleView={this.toggleView}
-          // headerRenderToHome={this.headerRenderToHome}
+          handleUpdateBookSubmit={this.handleUpdateBookSubmit}
         />
     }
 
