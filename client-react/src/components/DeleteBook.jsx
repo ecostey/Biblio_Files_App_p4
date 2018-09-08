@@ -9,7 +9,6 @@ import {
 } from '../services/api';
 
 
-
 class DeleteBook extends Component {
 
     constructor(props) {

@@ -33,6 +33,7 @@ class App extends Component {
     }
     this.selectBook = this.selectBook.bind(this);
     this.handleNewBookSubmit = this.handleNewBookSubmit.bind(this);
+    this.handleUpdateBookSubmit = this.handleUpdateBookSubmit.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.toggleView = this.toggleView.bind(this);
@@ -124,7 +125,7 @@ class App extends Component {
   }
 
   handleUpdateBookSubmit(e) {
-    e.preventDefault();
+    //e.preventDefault();
     //destructure state
     const { title, author, isbn } = this.state;
     //request body to PUT to books table.
