@@ -135,7 +135,6 @@ class App extends Component {
         this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
         this.toggleView('one-book');
-        this.toggleModal();
       }).catch(err => {
         throw Error(err);
       });

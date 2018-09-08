@@ -17,6 +17,7 @@ class UpdateBook extends Component {
       this.state = { showDialog: false };
       this.open = () => this.setState({ showDialog: true });
       this.close = () => this.setState({ showDialog: false });
+      this.handleUpdateClick = this.handleUpdateClick.bind(this)
     }
 
     //Update book's author/isbn/title &save inputs to database
@@ -25,10 +26,6 @@ class UpdateBook extends Component {
     handleUpdateClick() {
         this.close();
         this.handleUpdateBookSubmit(this.bookId)
-            .then(resp => {
-                this.toggleView('one-book');
-                this.fetchAllBooksPg();
-            });
     }
 
     render() {
@@ -64,7 +61,7 @@ class UpdateBook extends Component {
                 <button onClick={this.close}>Cancel</button>{" "}
                 <button
                   ref={this.buttonRef}
-                  onClick={this.close}
+                  onClick={this.handleUpdateClick}
                 >
                   Update
                 </button>
