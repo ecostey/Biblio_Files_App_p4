@@ -7,11 +7,15 @@ function OneBook(props) {
             <div className="OneTitle">{props.book.title}</div>
             <div className="OneAuthor">{props.book.author}</div>
             <div className="Oneisbn">isbn: {props.book.isbn}</div>
+            <UpdateBook
+                bookId={props.book.id}
+                toggleView={props.toggleView}
+                //fetchAllBooksPg={props.fetchAllBooksPg}
+            />
             <DeleteBook
                 bookId={props.book.id}
                 toggleView={props.toggleView}
                 fetchAllBooksPg={props.fetchAllBooksPg}
-                // currentView={props.currentView('all-books')}
             />
         </div>
     )

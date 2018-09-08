@@ -35,7 +35,6 @@ class Books extends Component {
                 <CreateBook 
                   newBookModal={this.props.newBookModal} 
                   toggleModal={this.props.toggleModal} 
-                  saveNewBook={this.props.saveNewBook}
                   handleChange={this.props.handleBookChange}
                   handleNewBookSubmit={this.props.handleNewBookSubmit}
                 />

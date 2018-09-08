@@ -80,10 +80,8 @@ class App extends Component {
 
   // fetch one book & set state to that one book
   fetchOneBook(id) {
-    debugger
     fetchBook(id)
       .then(data => {
-        debugger
         this.setState({
           selectedBook: data,
           currentView: 'one-book'
@@ -108,18 +106,21 @@ class App extends Component {
 
   //On submit - save the new book to the books table
   handleNewBookSubmit(e) {
+    debugger
     e.preventDefault();
     //destructure state
     const { title, author, isbn } = this.state;
     //request body to POST to books table.
     const newBook = { title, author, isbn };
-
+    debugger
     //Save the new book's data to state
     saveNewBook(newBook)
       .then(resp => {
+        debugger
         this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
         this.toggleView('one-book');
+        this.toggleModal();
       }).catch(err => {
         throw Error(err);
       });
@@ -138,8 +139,8 @@ class App extends Component {
           selectBook={this.selectBook}
           toggleModal={this.toggleModal}
           newBookModal={this.state.newBookModal}
-          saveNewBook={this.handleNewBookSubmit}
           handleBookChange={this.handleChange}
+          handleNewBookSubmit={this.handleNewBookSubmit}
 
         />
       //Single Book View
