@@ -3,10 +3,6 @@ import {
     DialogOverlay,
     DialogContent
 } from "@reach/dialog";
-// import {
-//     fetchBook,
-//     updateBook
-// } from '../services/api';
 
 
 class UpdateBook extends Component {
@@ -26,7 +22,8 @@ class UpdateBook extends Component {
     //Update book's author/isbn/title &save inputs to database
     //Then re-render 'OneBook' component/view
     //to show user the book was updated
-    handleUpdateClick() {
+    handleUpdateClick(e) {
+        e.preventDefault();
         this.close();
         this.props.handleUpdateBookSubmit(this.props.bookId)
     }
@@ -46,20 +43,20 @@ class UpdateBook extends Component {
                                     type="text"
                                     name="title"
                                     value={this.title}
-                                    placeholder="Title"
-                                    onChange={this.handleChange} />
+                                    placeholder={this.props.oneBook.title}
+                                    onChange={this.props.handleChange} />
                                 <input
                                     type="text"
                                     name="author"
                                     value={this.author}
-                                    placeholder="Author's Name"
-                                    onChange={this.handleChange} />
+                                    placeholder={this.props.oneBook.author}
+                                    onChange={this.props.handleChange} />
                                 <input
                                     type="text"
                                     name="isbn"
                                     value={this.isbn}
-                                    placeholder="isbn #"
-                                    onChange={this.handleChange} />
+                                    placeholder= {this.props.oneBook.isbn}
+                                    onChange={this.props.handleChange} />
                             </ form>
                             <button onClick={this.close}>Cancel</button>{" "}
                             <button

@@ -124,14 +124,13 @@ class App extends Component {
       });
   }
 
-  handleUpdateBookSubmit(e) {
-    //e.preventDefault();
+  handleUpdateBookSubmit(bookId) {
     //destructure state
     const { title, author, isbn } = this.state;
     //request body to PUT to books table.
     const book = { title, author, isbn };
     //Save the new book's data to state
-    updateBook(book, this.bookId)
+    updateBook(book, bookId)
       .then(resp => {
         this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
@@ -162,6 +161,7 @@ class App extends Component {
       case 'one-book':
         return <OneBook
           book={selectedBook}
+          handleChange={this.handleChange}
           fetchAllBooksPg={this.fetchAllBooksPg}
           toggleView={this.toggleView}
           handleUpdateBookSubmit={this.handleUpdateBookSubmit}

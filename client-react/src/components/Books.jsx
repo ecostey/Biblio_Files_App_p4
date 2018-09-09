@@ -11,7 +11,6 @@ class Books extends Component {
         this.state = {
             filterInput: '',
             modal: '',
-
         }
         this.handleChange = this.handleChange.bind(this)
         
