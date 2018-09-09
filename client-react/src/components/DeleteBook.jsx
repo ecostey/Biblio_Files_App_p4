@@ -3,10 +3,7 @@ import {
     DialogOverlay,
     DialogContent
 } from "@reach/dialog";
-import {
-    fetchBooks,
-    deleteBook
-} from '../services/api';
+import { deleteBook } from '../services/api';
 
 
 class DeleteBook extends Component {
@@ -37,22 +34,27 @@ class DeleteBook extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.open}>Delete from Catalogue</button>
-
+                <button
+                    onClick={this.open}
+                    className="deleteButton"
+                >Delete</button>
                 {this.state.showDialog && (
                     <DialogOverlay initialFocusRef={this.buttonRef}>
-                        <DialogContent>
+                        <DialogContent >
                             <p>
                                 Are you sure you'd like to remove this book from your catalogue?
                             </p>
-                            <button
-                                onClick={this.handleDeleteClick}
-                            >Yes</button>{" "}
-                            <button
-                                ref={this.buttonRef}
-                                onClick={this.close}
-                            >Oops, Nope!
-                            </button>
+                            <br />
+                            <div className="modalButtons">
+                                <button
+                                    onClick={this.handleDeleteClick}
+                                >Yes</button>{" "}
+                                <button
+                                    ref={this.buttonRef}
+                                    onClick={this.close}
+                                >Oops, Nope!
+                                </button>
+                            </div>
                         </DialogContent>
                     </DialogOverlay>
                 )}

@@ -181,9 +181,9 @@ class App extends Component {
           >Biblio Files
           </h1>
         </header>
-        <div>
+        <body>
           {this.switchView()}
-        </div>
+        </body>
       </div>
     );
   }

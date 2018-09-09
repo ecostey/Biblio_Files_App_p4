@@ -13,7 +13,7 @@ class Books extends Component {
             modal: '',
         }
         this.handleChange = this.handleChange.bind(this)
-        
+
     }
     //Set state to whatever is inputted in the search box,
     handleChange(ev) {
@@ -27,17 +27,21 @@ class Books extends Component {
             return book.title.toLowerCase().includes(this.state.filterInput.toLowerCase());
         })
         return (
-            <div>
+            <div className="landingPg">
                 <SearchFilter
-                    handleChange={this.handleChange} 
+                    handleChange={this.handleChange}
                 />
-                <CreateBook 
-                  newBookModal={this.props.newBookModal} 
-                  toggleModal={this.props.toggleModal} 
-                  handleChange={this.props.handleBookChange}
-                  handleNewBookSubmit={this.props.handleNewBookSubmit}
+                <CreateBook
+                    newBookModal={this.props.newBookModal}
+                    toggleModal={this.props.toggleModal}
+                    handleChange={this.props.handleBookChange}
+                    handleNewBookSubmit={this.props.handleNewBookSubmit}
                 />
-                <button onClick={this.props.toggleModal}> Add New Book to Catalogue </button>
+                <button
+                    onClick={this.props.toggleModal}
+                    className="createButton">
+                    Add New Book
+                </button>
                 {filteredBooks.map(book => (
                     <div
                         key={book.id}
@@ -49,6 +53,7 @@ class Books extends Component {
                         <div className="AllTitles">{book.title}</div>
                         <div className="AllAuthors">{book.author}</div>
                         <div className="Allisbns">{book.isbn}</div>
+                        <div>📖</div>
                         <br />
                     </div>
                 ))}

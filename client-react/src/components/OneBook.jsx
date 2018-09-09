@@ -30,6 +30,7 @@ function OneBook(props) {
                 toggleView={props.toggleView}
                 fetchAllBooksPg={props.fetchAllBooksPg}
             />
+            <img src="https://i.imgur.com/kDzDhYq.jpg" title="Book Shelf" className="bookShelfImg" />
         </div>
     )
 }

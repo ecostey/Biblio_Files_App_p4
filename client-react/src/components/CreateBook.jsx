@@ -21,13 +21,13 @@ function CreateBook(props) {
                             name="title"
                             value={props.title}
                             placeholder="Title"
-                            onChange={props.handleChange} />
+                            onChange={props.handleChange} /> <br /><br />
                         <input
                             type="text"
                             name="author"
                             value={props.author}
                             placeholder="Author's Name"
-                            onChange={props.handleChange} />
+                            onChange={props.handleChange} /> <br /><br />
                         <input
                             type="text"
                             name="isbn"
