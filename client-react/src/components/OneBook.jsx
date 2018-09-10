@@ -7,7 +7,9 @@ function OneBook(props) {
     return (
         <div>
             <div className="OneTitle">{props.book.title}</div>
+            <br />
             <div className="OneAuthor">{props.book.author}</div>
+            <br />
             <div className="Oneisbn">isbn: {props.book.isbn}</div>
             {/* <CheckoutBook
             oneBook={props.book}
