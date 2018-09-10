@@ -1,8 +1,8 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = process.env.REACT_APP_API_URL;
 
 //Fetches all Books from localhost:3000
 export function fetchBooks() {
-    return fetch(`http://localhost:3000/books`)
+    return fetch(`${BASE_URL}/books`)
         .then((resp) =>  resp.json())
         .catch((err) => {
             throw Error(err);
