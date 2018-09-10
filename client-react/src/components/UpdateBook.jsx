@@ -9,9 +9,6 @@ class UpdateBook extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            books: [],
-        }
         this.buttonRef = React.createRef();
         this.state = { showDialog: false };
         this.open = () => this.setState({ showDialog: true });
