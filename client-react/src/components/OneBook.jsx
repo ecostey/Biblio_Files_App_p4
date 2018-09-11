@@ -25,6 +25,9 @@ function OneBook(props) {
                 toggleView={props.toggleView}
                 handleUpdateBookSubmit={props.handleUpdateBookSubmit}
                 handleChange={props.handleChange}
+                open={props.open}
+                close={props.close}
+                showDialog={props.showDialog}
                 //fetchAllBooksPg={props.fetchAllBooksPg}
             />
             <DeleteBook

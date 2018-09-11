@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
   fetchBooks,
-  fetchPatrons,
   fetchBook,
-  fetchPatron,
   saveNewBook,
   updateBook,
+    // fetchPatron,
+    // fetchPatrons,
 } from './services/api';
 import Books from './components/Books';
 import OneBook from './components/OneBook';
@@ -30,7 +30,10 @@ class App extends Component {
       selectedBook: '',
       patrons: [],
       currentView: 'all-books',
+      showDialog: false ,
     }
+    this.updatebuttonRef = React.createRef();
+
     this.selectBook = this.selectBook.bind(this);
     this.handleNewBookSubmit = this.handleNewBookSubmit.bind(this);
     this.handleUpdateBookSubmit = this.handleUpdateBookSubmit.bind(this);
@@ -39,6 +42,9 @@ class App extends Component {
     this.toggleView = this.toggleView.bind(this);
     this.fetchAllBooksPg = this.fetchAllBooksPg.bind(this);
     this.homePage = this.homePage.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
   }
 
   //When component first mount, fetch all books & set them to state.
@@ -65,7 +71,7 @@ class App extends Component {
   //Set state to whatever is entered into an input field.
   //Used in Create & Update modals
   handleChange(e) {
-    console.log(e.target.title)
+    // console.log(e.target.title)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -128,6 +134,11 @@ class App extends Component {
       });
   }
 
+  // buttonRef = React.createRef();
+  
+  open = () => this.setState({ showDialog: true  });
+  close = () => this.setState({ showDialog: false });
+
   handleUpdateBookSubmit(bookId) {
     //destructure state
     const { title, author, isbn } = this.state;
@@ -137,12 +148,20 @@ class App extends Component {
     updateBook(book, bookId)
       .then(resp => {
         // this.setState({ title: '', author: '', isbn: '' })
-        debugger;
         this.fetchOneBook(resp.id);
         this.toggleView('one-book');
       }).catch(err => {
         throw Error(err);
       });
+  }
+
+  //Update book's author/isbn/title &save inputs to database
+  //Then re-render 'OneBook' component/view
+  //to show user the book was updated
+  handleUpdateClick(e) {
+    e.preventDefault();
+    this.close();
+    this.props.handleUpdateBookSubmit(this.props.bookId)
   }
 
   //Switch which views are rendered.
@@ -166,10 +185,14 @@ class App extends Component {
       case 'one-book':
         return <OneBook
           book={selectedBook}
+          showDialog={this.state.showDialog}
+          // title={selectedBook.title}
           handleChange={this.handleChange}
           fetchAllBooksPg={this.fetchAllBooksPg}
           toggleView={this.toggleView}
           handleUpdateBookSubmit={this.handleUpdateBookSubmit}
+          open={this.open}
+          close={this.close}
         />
     }
 
