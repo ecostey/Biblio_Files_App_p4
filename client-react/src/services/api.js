@@ -1,4 +1,5 @@
-const BASE_URL = process.env.REACT_APP_API_URL;
+const BASE_URL = 'http://localhost:3000';
+//const BASE_URL = process.env.REACT_APP_API_URL;
 
 //Fetches all Books from localhost:3000
 export function fetchBooks() {
@@ -48,6 +49,7 @@ export function saveNewBook(book) {
 
 //Finds & Updates a book by id
 export function updateBook(book, bookId) {
+    debugger;
     console.log(book)
     const opts = {
         method: 'PUT',

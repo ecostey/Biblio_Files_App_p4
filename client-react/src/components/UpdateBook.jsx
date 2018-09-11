@@ -44,21 +44,21 @@ class UpdateBook extends Component {
                                 <input
                                     type="text"
                                     name="title"
-                                    value={this.title}
+                                    value={this.props.oneBook.title}
                                     placeholder={this.props.oneBook.title}
                                     onChange={this.props.handleChange} />
                                 <br /><br />
                                 <input
                                     type="text"
                                     name="author"
-                                    value={this.author}
+                                    value={this.props.oneBook.author}
                                     placeholder={this.props.oneBook.author}
                                     onChange={this.props.handleChange} />
                                 <br /><br />
                                 <input
                                     type="text"
                                     name="isbn"
-                                    value={this.isbn}
+                                    value={this.props.oneBook.isbn}
                                     placeholder={this.props.oneBook.isbn}
                                     onChange={this.props.handleChange} />
                             </ form>

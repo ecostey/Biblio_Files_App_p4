@@ -65,9 +65,13 @@ class App extends Component {
   //Set state to whatever is entered into an input field.
   //Used in Create & Update modals
   handleChange(e) {
+    console.log(e.target.title)
     this.setState({
       [e.target.name]: e.target.value
     })
+    // this.setState((prevState, e) => {
+    //   return {[e.target.name]: prevState += e.target.value}
+    // })
   }
 
   // select one book
@@ -132,7 +136,8 @@ class App extends Component {
     //Save the new book's data to state
     updateBook(book, bookId)
       .then(resp => {
-        this.setState({ title: '', author: '', isbn: '' })
+        // this.setState({ title: '', author: '', isbn: '' })
+        debugger;
         this.fetchOneBook(resp.id);
         this.toggleView('one-book');
       }).catch(err => {
