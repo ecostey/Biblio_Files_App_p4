@@ -148,14 +148,13 @@ class App extends Component {
   //Close the update modal.
   close = () => this.setState({ showDialog: false });
 
-  handleUpdateBookSubmit(bookId) {
-    debugger
+  handleUpdateBookSubmit() {
     //destructure state
     const { title, author, isbn } = this.state;
     //request body to PUT to books table.
     const book = { title, author, isbn };
     //Save the new book's data to state
-    updateBook(book, bookId)
+    updateBook(book, this.state.selectedBook.id)
       .then(resp => {
         // this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
@@ -169,7 +168,6 @@ class App extends Component {
   //Then re-render 'OneBook' component/view
   //to show user the book was updated
   handleUpdateClick(bookId) {
-    debugger
     this.close();
     this.handleUpdateBookSubmit(bookId)
   }
