@@ -13,7 +13,6 @@ class Books extends Component {
             modal: '',
         }
         this.handleChange = this.handleChange.bind(this)
-
     }
     //Set state to whatever is inputted in the search box,
     handleChange(ev) {

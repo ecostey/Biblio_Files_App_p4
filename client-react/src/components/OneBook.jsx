@@ -17,18 +17,19 @@ function OneBook(props) {
             toggleView={props.toggleView}
             handleUpdateBookSubmit={props.handleUpdateBookSubmit}
             handleChange={props.handleChange}
-            //fetchAllBooksPg={props.fetchAllBooksPg}
             /> */}
             <UpdateBook
                 oneBook={props.book}
+                title={props.title}
+                author={props.author}
+                isbn={props.isbn}
                 bookId={props.book.id}
                 toggleView={props.toggleView}
-                handleUpdateBookSubmit={props.handleUpdateBookSubmit}
+                handleUpdateClick={props.handleUpdateClick}
                 handleChange={props.handleChange}
                 open={props.open}
                 close={props.close}
                 showDialog={props.showDialog}
-                //fetchAllBooksPg={props.fetchAllBooksPg}
             />
             <DeleteBook
                 bookId={props.book.id}

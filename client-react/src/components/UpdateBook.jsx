@@ -6,10 +6,16 @@ import {
 
 //UpdateBook component & Modal from ReachUI
 function UpdateBook(props) {
+    const newData={
+        title: props.title,
+        author: props.author,
+        isbn: props.isbn,
+        bookId: props.oneBook.id
+    }
     return (
         <div>
             <button
-                onClick={props.open}
+                onClick={()=>props.open(props.oneBook)}
                 className="editButton"
             >Edit Book</button>
             {props.showDialog && (
@@ -17,29 +23,29 @@ function UpdateBook(props) {
                     <DialogContent>
                         <p>
                             Edit Book Information
-                            </p>
+                        </p>
                         <form
-                            onSubmit={props.handleBookSubmit}
+                            // onSubmit={()=>props.handleUpdateClick(props.oneBook.id)}
                             className="modalButtons" >
                             <input
                                 type="text"
                                 name="title"
-                                value={props.oneBook.title}
-                                placeholder={props.oneBook.title}
+                                value={props.title}
+                                placeholder={props.title}
                                 onChange={props.handleChange} />
                             <br /><br />
                             <input
                                 type="text"
                                 name="author"
-                                value={props.oneBook.author}
-                                placeholder={props.oneBook.author}
+                                value={props.author}
+                                placeholder={props.author}
                                 onChange={props.handleChange} />
                             <br /><br />
                             <input
                                 type="text"
                                 name="isbn"
-                                value={props.oneBook.isbn}
-                                placeholder={props.oneBook.isbn}
+                                value={props.isbn}
+                                placeholder={props.isbn}
                                 onChange={props.handleChange} />
                         </ form>
                         <br />

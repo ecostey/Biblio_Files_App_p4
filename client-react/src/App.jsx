@@ -4,8 +4,8 @@ import {
   fetchBook,
   saveNewBook,
   updateBook,
-    // fetchPatron,
-    // fetchPatrons,
+  // fetchPatron,
+  // fetchPatrons,
 } from './services/api';
 import Books from './components/Books';
 import OneBook from './components/OneBook';
@@ -30,8 +30,9 @@ class App extends Component {
       selectedBook: '',
       patrons: [],
       currentView: 'all-books',
-      showDialog: false ,
+      showDialog: false,
     }
+
     this.updatebuttonRef = React.createRef();
 
     this.selectBook = this.selectBook.bind(this);
@@ -54,7 +55,7 @@ class App extends Component {
   }
 
   //Make logo/Header clickable- will return user to 'all-books' view.
-  homePage () {
+  homePage() {
     this.setState({
       currentView: 'all-books'
     })
@@ -134,12 +135,21 @@ class App extends Component {
       });
   }
 
-  // buttonRef = React.createRef();
-  
-  open = () => this.setState({ showDialog: true  });
+  //Open the update modal & set the state to the current book's data (pre-update)
+  open(oneBook) {
+    this.setState({
+      showDialog: true,
+      title: oneBook.title,
+      author: oneBook.author,
+      isbn: oneBook.isbn,
+    });
+  }
+
+  //Close the update modal.
   close = () => this.setState({ showDialog: false });
 
   handleUpdateBookSubmit(bookId) {
+    debugger
     //destructure state
     const { title, author, isbn } = this.state;
     //request body to PUT to books table.
@@ -158,10 +168,10 @@ class App extends Component {
   //Update book's author/isbn/title &save inputs to database
   //Then re-render 'OneBook' component/view
   //to show user the book was updated
-  handleUpdateClick(e) {
-    e.preventDefault();
+  handleUpdateClick(bookId) {
+    debugger
     this.close();
-    this.props.handleUpdateBookSubmit(this.props.bookId)
+    this.handleUpdateBookSubmit(bookId)
   }
 
   //Switch which views are rendered.
@@ -185,12 +195,14 @@ class App extends Component {
       case 'one-book':
         return <OneBook
           book={selectedBook}
+          title={this.state.title}
+          author={this.state.author}
+          isbn={this.state.isbn}
           showDialog={this.state.showDialog}
-          // title={selectedBook.title}
           handleChange={this.handleChange}
           fetchAllBooksPg={this.fetchAllBooksPg}
           toggleView={this.toggleView}
-          handleUpdateBookSubmit={this.handleUpdateBookSubmit}
+          handleUpdateClick={this.handleUpdateClick}
           open={this.open}
           close={this.close}
         />

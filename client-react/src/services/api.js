@@ -49,8 +49,6 @@ export function saveNewBook(book) {
 
 //Finds & Updates a book by id
 export function updateBook(book, bookId) {
-    debugger;
-    console.log(book)
     const opts = {
         method: 'PUT',
         body: JSON.stringify({ book }),
