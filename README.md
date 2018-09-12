@@ -18,14 +18,30 @@ Make UPDATES to that one book (including the book’s status- checked in or out)
 ADD NEW books to the library’s catalogue
 REMOVE the books to the library’s catalogue
 
-# Technologies Used:
-React (JSX)
-Ruby on Rails 
-Bulma - create modal
-ReachUI - Delete & Update modals
-Deployment on Heroku
+# Code style
+ AirBnB Javascript Style Guide
 
-# Successes:
+# Technologies Used:
+ - React (JSX)
+ - Ruby on Rails 
+ - Bulma - create modal
+ - ReachUI - Delete & Update modals
+ - Deployment on Heroku, with help from Surge
+ 
+ ## Set Up/How to use:
+
+Backend
+ - Fork and/or clone this repo
+ - Cd into 'backend' and 'gem install rails', if you don't have it already
+ - Install 'gems bundle install'
+ - To create needed config, database, and load db/seeds with 'rake setup'
+ - Create and seed the database with 'rake db:setup'
+ - Finally, type 'rails s' to begin the server
+
+Frontend
+ - Cd into 'client' and type 'yarn install', and then 'yarn start'
+
+# Sample/Code Snip-It:
 This project uses 3 modals (For create-Bulma, update-ReachUI and delete-ReachUI). It was a little tricky to figure out how to set up the modals, but once they were up, they were very easy to manage & I'm glad I used them.
 Bulma's stylings are more elegant & have smoother transitions, but they require far more set up (Bulma provides NO JavaScript). ReachUI is build for react and was ready to go basically from the begining. However, ReachUI required more manual styling in CSS and JSX.
 
@@ -40,11 +56,11 @@ The How-To In a nutshell:
     * .filter will the books based on whether they match the inputted criteria.
 4) After the .filter, use the .map method to loop through the filtered array and render the matching books.
 
-# Challenges:
-I've run into an issue where the update form REQUIRES you to update ALL the information. 
-Any update field that remains un-changed reverts to null... Not Good.
-
 # POST MVP:
 	-Create Librarian table/logins/accounts (AUTH)
 	-Allow librarians to create/update/delete/view patron’s accounts
 	-Generate alerts for overdue books
+	
+## Credits
+Thank you to the instructors at General Assembly, fellow peers, and Stack Overflow for helping solve various bugs and issues.
+
