@@ -6,12 +6,12 @@ import {
 
 //UpdateBook component & Modal from ReachUI
 function UpdateBook(props) {
-    const newData={
-        title: props.title,
-        author: props.author,
-        isbn: props.isbn,
-        bookId: props.oneBook.id
-    }
+    // const newData={
+    //     title: props.title,
+    //     author: props.author,
+    //     isbn: props.isbn,
+    //     bookId: props.oneBook.id
+    // }
     return (
         <div>
             <button

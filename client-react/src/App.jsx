@@ -31,6 +31,7 @@ class App extends Component {
       patrons: [],
       currentView: 'all-books',
       showDialog: false,
+      loading: false,
     }
 
     this.updatebuttonRef = React.createRef();
@@ -46,12 +47,16 @@ class App extends Component {
     this.handleUpdateClick = this.handleUpdateClick.bind(this);
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
+    
   }
-
   //When component first mount, fetch all books & set them to state.
   componentDidMount() {
     fetchBooks()
-      .then(data => this.setState({ books: data.books }));
+      .then(data => this.setState({ 
+        books: data.books, 
+        loading: true,
+      }));
+
   }
 
   //Make logo/Header clickable- will return user to 'all-books' view.
@@ -128,6 +133,7 @@ class App extends Component {
       .then(resp => {
         this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
+        this.fetchAllBooksPg();
         this.toggleView('one-book');
         this.toggleModal();
       }).catch(err => {
@@ -158,6 +164,7 @@ class App extends Component {
       .then(resp => {
         // this.setState({ title: '', author: '', isbn: '' })
         this.fetchOneBook(resp.id);
+        this.fetchAllBooksPg();
         this.toggleView('one-book');
       }).catch(err => {
         throw Error(err);
@@ -187,6 +194,7 @@ class App extends Component {
           newBookModal={this.state.newBookModal}
           handleBookChange={this.handleChange}
           handleNewBookSubmit={this.handleNewBookSubmit}
+          componentDidMount={this.componentDidMount}
 
         />
       //Single Book View
