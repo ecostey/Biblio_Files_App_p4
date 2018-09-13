@@ -195,7 +195,7 @@ class App extends Component {
           handleBookChange={this.handleChange}
           handleNewBookSubmit={this.handleNewBookSubmit}
           componentDidMount={this.componentDidMount}
-
+          loading={this.state.loading}
         />
       //Single Book View
       case 'one-book':

@@ -23,27 +23,15 @@ class Books extends Component {
 
     render() {
         //If books have not loaded, show loading view
-        if (this.props.books.length === 0) {
+        if (this.props.books.length === 0 && this.props.loading === false) {
             return (
                 <div className="loading">
                     <p className="loadingTxt">Loading...</p>
                     <img src="https://i.imgur.com/V1s9IJX.gif" alt="Loading" className="loadingImg" />
                 </div>
             )
-        } else if (this.props.books.length === 0 && this.props.componentDidMount) {
-            return (
-                <div className="noBooksError">
-                    <p className="loadingTxt">Sorry!<br />There are no books in this catalogue.</p>
-                    <CreateBook
-                        newBookModal={this.props.newBookModal}
-                        toggleModal={this.props.toggleModal}
-                        handleChange={this.props.handleBookChange}
-                        handleNewBookSubmit={this.props.handleNewBookSubmit}
-                    />
-                </div>
-            )
-        } else {
-            // Filter through props.books.
+        } else if (this.props.books.length > 0) {
+        // Filter through props.books.
             // Return 'words' that match the inputted string.let content;
             let filteredBooks = this.props.books.filter((book) => {
                 return book.title.toLowerCase().includes(this.state.filterInput.toLowerCase());
@@ -63,7 +51,7 @@ class Books extends Component {
                         onClick={this.props.toggleModal}
                         className="createButton">
                         Add New Book
-                        </button>
+                    </button>
                     {filteredBooks.map(book => (
                         <div
                             key={book.id}
@@ -80,6 +68,25 @@ class Books extends Component {
                         </div>
                     ))}
                 </div>)
+        } else if (this.props.books.length === 0 && this.props.loading === true) {
+            return (
+                <div className="ErrorNoBooks">
+                    <p className="loadingTxt">There are no books in this catalogue.</p>
+                    <CreateBook
+                        newBookModal={this.props.newBookModal}
+                        toggleModal={this.props.toggleModal}
+                        handleChange={this.props.handleBookChange}
+                        handleNewBookSubmit={this.props.handleNewBookSubmit}
+                    />
+                    <button
+                        onClick={this.props.toggleModal}
+                        className="createButton-fromNoBooks">
+                        Add New Book
+                    </button>
+                    <br />
+                    <img src="https://i.imgur.com/qzg3US0.jpg" alt="no books" />
+                </div>
+            )
         }
     }
 }
